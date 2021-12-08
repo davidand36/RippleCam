@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require( 'favicons-webpack-plugin' )
 
 module.exports = {
   entry: './src/index.ts',
@@ -8,6 +9,7 @@ module.exports = {
       title: 'Ripple Cam',
       template: 'src/index.html',
     }),
+    new FaviconsWebpackPlugin('assets/logo.svg'),
   ],
   output: {
     filename: 'bundle.js',
