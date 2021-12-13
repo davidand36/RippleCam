@@ -1,0 +1,54 @@
+@import "colors.css";
+
+@font-face {
+  font-family: "DisplayFont";
+  src: url("../assets/LilyScriptOne-Regular.ttf");
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+
+.body__header {
+  text-align: center;
+  font-family: "DisplayFont";
+}
+
+.header__h1 {
+  font-size: 60px;
+  margin: 10px 0;
+}
+
+.message_error {
+  display: none;
+  margin: 0 auto 1rem;
+  border: medium double var(--error-dark-color);
+  padding: 1rem;
+  text-align: center;
+  color: var(--error-dark-color);
+  background-color: var(--error-light-color);
+}
+
+.body__main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-container {
+  margin: auto;
+  width: 640px;
+  height: 480px;
+}
+
+.body__footer {
+  margin-top: auto;
+  border-top: #000d74 solid thin;
+  padding: 0.5rem 1rem;
+  background-color: #b9d9eb;
+  text-align: center;
+}
