@@ -9,7 +9,7 @@ module.exports = {
       title: 'Ripple Cam',
       template: 'src/index.html',
     }),
-    new FaviconsWebpackPlugin('assets/logo.svg'),
+    new FaviconsWebpackPlugin('assets/favicon/logo.svg'),
   ],
   output: {
     filename: 'bundle.js',
@@ -26,7 +26,11 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-      }
+      },
+      {
+        test: /\.(svg|png|jpg|jpeg|gif|opus|ogg|mp3|ogv|mp4|webm|woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
