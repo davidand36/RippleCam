@@ -1,4 +1,5 @@
 @import "colors.css";
+@import "buttons.css";
 
 @font-face {
   font-family: "DisplayFont";
@@ -22,12 +23,14 @@ body {
   margin: 10px 0;
 }
 
-.message_error {
-  display: none;
-  margin: 0 auto 1rem;
-  border: medium double var(--error-dark-color);
+.message {
   padding: 1rem;
   text-align: center;
+}
+
+.message_error {
+  margin: 0 auto 1rem;
+  border: medium double var(--error-dark-color);
   color: var(--error-dark-color);
   background-color: var(--error-light-color);
 }
@@ -35,14 +38,15 @@ body {
 .body__main {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
 
 .canvas-container {
+  display: none;
   margin: auto;
-  width: 640px;
-  height: 480px;
 }
 
 .body__footer {

@@ -21,8 +21,12 @@ export default class OffscreenVideo {
   async start(): Promise<HTMLCanvasElement> {
     const self = this;
     return new Promise((resolve, reject) => {
-      this.video.play();
-      this.video.addEventListener('loadedmetadata', setupCanvas);
+      try {
+        this.video.play();
+        this.video.addEventListener('loadedmetadata', setupCanvas);
+      } catch (err) {
+        reject(err);
+      }
 
       function setupCanvas(): void {
         self.canvas = document.createElement('canvas');

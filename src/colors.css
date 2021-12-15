@@ -1,4 +1,11 @@
 :root {
+  --primary-dark-color: rgb(0, 13, 116);
+  --primary-light-color: rgb(185, 217, 235);
+  --primary-highlight-color: rgb(255, 255, 0);
+  --primary-dark-lighter-20: rgb(0, 22, 195);
+  --primary-light-lighter-20: rgb(199, 225, 239);
+  --primary-light-lighter-60: rgb(227, 240, 247);
+
   --error-dark-color: rgb(100, 0, 0);
   --error-light-color: rgb(255, 220, 220);
 }

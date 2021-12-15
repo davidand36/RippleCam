@@ -1,0 +1,31 @@
+/*
+  buttons.css
+
+  Styling for buttons
+*/
+
+.button {
+  border-width: thin;
+  border-style: solid;
+  border-radius: 0.25em;
+  padding: 0.25em 1.5em;
+  text-decoration: none;
+  line-height: normal;
+  white-space: nowrap;
+  /* font-family: var(--body-font-family); */
+  font-size: 1rem;
+}
+
+.button_primary {
+  border-color: var(--primary-dark-color);
+  background-color: var(--primary-light-color);
+  color: var(--primary-dark-color);
+}
+
+.button_primary:hover {
+  background-color: var(--primary-light-lighter-60);
+}
+
+.button_large {
+  font-size: 2rem;
+}
