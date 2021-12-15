@@ -1,21 +1,18 @@
 @import "colors.css";
 @import "buttons.css";
-
-@font-face {
-  font-family: "DisplayFont";
-  src: url("../assets/LilyScriptOne-Regular.ttf");
-}
+@import "fonts.css";
 
 body {
   display: flex;
   flex-direction: column;
   height: 100vh;
   margin: 0;
+  font-family: var(--text-font-family);
 }
 
 .body__header {
   text-align: center;
-  font-family: "DisplayFont";
+  font-family: var(--display-font-family);
 }
 
 .header__h1 {

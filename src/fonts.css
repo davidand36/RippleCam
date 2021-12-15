@@ -1,0 +1,12 @@
+/*
+  fonts.css
+
+  Theme fonts
+*/
+
+@import 'https://fonts.googleapis.com/css?family=Lily+Script+One|Roboto&display=swap&subset=latin-ext';
+
+:root {
+  --display-font-family: 'Lily Script One', serif;
+  --text-font-family: 'Roboto', sans-serif;
+}

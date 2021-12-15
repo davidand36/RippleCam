@@ -12,7 +12,7 @@
   text-decoration: none;
   line-height: normal;
   white-space: nowrap;
-  /* font-family: var(--body-font-family); */
+  font-family: var(--text-font-family);
   font-size: 1rem;
 }
 
