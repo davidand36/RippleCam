@@ -8,9 +8,9 @@ import { setMessage } from './message';
 import { Timer } from './Timer';
 import { getCameraMediaStream } from './camera';
 import OffscreenVideo from './OffscrenVideo';
-import { addCanvasToContainer, resizeContainedCanvas } from './canvas';
+import { addCanvasToContainer, resizeContainedCanvas, fillCanvas } from './canvas';
 import Rippler from './Rippler';
-import { startDisplayLoop } from './displayLoop';
+import { startDisplayLoop, stopDisplayLoop } from './displayLoop';
 import fallback from '../assets/Fallback.mp4';
 import { getClickOffset  } from './events';
 
@@ -36,7 +36,8 @@ export async function runApp(): Promise<void> {
     startDisplayLoop(update);
     onscreenCanvas.addEventListener('click', handleCanvasClick);
     window.addEventListener('resize', resizeCanvas);
-    setMessage('Click the video to make waves.', 'message');
+    video.onended(handleEnded);
+    setMessage('Click on the video to make waves.', 'message');
 
     function update() {
       video.update();
@@ -52,6 +53,17 @@ export async function runApp(): Promise<void> {
     function resizeCanvas() {
       const aspectRatio = videoCanvas.width / videoCanvas.height;
       resizeContainedCanvas(onscreenCanvas, aspectRatio);
+    }
+
+    function handleEnded() {
+      stopDisplayLoop();
+      fillCanvas(onscreenCanvas, 'white');
+      setTimeout(() => {
+        onscreenCanvas.remove();
+        canvasContainer.style.display = 'none';
+        startButton.style.display = 'inline-block';
+        setMessage("Do it again, if you'd like.", 'message');
+      }, 100);
     }
   }
 }

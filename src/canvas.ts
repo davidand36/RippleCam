@@ -36,3 +36,9 @@ export function resizeContainedCanvas(canvas: HTMLCanvasElement, aspectRatio: nu
   canvas.width = container.clientWidth;
   canvas.height = container.clientHeight;
 }
+
+export function fillCanvas(canvas: HTMLCanvasElement, color: string): void {
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = color;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}

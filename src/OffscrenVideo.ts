@@ -4,10 +4,13 @@
   Video that draws to an off-screen canvas
 */
 
+type CallbackFunction = (video: OffscreenVideo) => void;
+
 export default class OffscreenVideo {
   private video: HTMLVideoElement;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
+  private endedCallback: CallbackFunction;
 
   constructor(source: string | MediaStream ) {
     this.video = document.createElement('video');
@@ -24,6 +27,7 @@ export default class OffscreenVideo {
       try {
         this.video.play();
         this.video.addEventListener('loadedmetadata', setupCanvas);
+        this.video.addEventListener('ended', handleEnded);
       } catch (err) {
         reject(err);
       }
@@ -36,11 +40,24 @@ export default class OffscreenVideo {
         resolve(self.canvas);
       }
     });
+
+    function handleEnded(): void {
+      self.ctx = null;
+      self.canvas = null;
+      self.video = null;
+      if (self.endedCallback) {
+        self.endedCallback(self);
+      }
+    }
   }
 
   update(): void {
     if (this.ctx) {
       this.ctx.drawImage(this.video, 0, 0);
     }
+  }
+
+  onended(callback: CallbackFunction): void {
+    this.endedCallback = callback;
   }
 }
