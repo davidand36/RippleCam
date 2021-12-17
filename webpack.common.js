@@ -1,15 +1,21 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FaviconsWebpackPlugin = require( 'favicons-webpack-plugin' )
+const HtmlPlugin = require('html-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+// const FaviconsWebpackPlugin = require( 'favicons-webpack-plugin' )
 
 module.exports = {
   entry: './src/index.ts',
   plugins: [
-    new HtmlWebpackPlugin({
+    new HtmlPlugin({
       title: 'Ripple Cam',
       template: 'src/index.html',
     }),
-    new FaviconsWebpackPlugin('assets/favicon/logo.svg'),
+    // new FaviconsWebpackPlugin('assets/favicon/logo.svg'),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      exclude: [ /\.mp4$/ ],
+    }),
   ],
   output: {
     filename: 'bundle.js',
