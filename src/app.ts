@@ -1,5 +1,5 @@
 /*
-  App.ts
+  app.ts
 
   Main app logic
 */
@@ -7,12 +7,15 @@
 import { setMessage } from './message';
 import { Timer } from './Timer';
 import { getCameraMediaStream } from './camera';
+import { OffscreenCanvasProvider } from './OffscreenCanvasProvider';
 import OffscreenVideo from './OffscrenVideo';
+import OffscreenImage from './OffscreenImage';
 import { addCanvasToContainer, resizeContainedCanvas, fillCanvas } from './canvas';
 import Rippler from './Rippler';
 import { startDisplayLoop, stopDisplayLoop } from './displayLoop';
-import fallback from '../assets/Fallback.mp4';
 import { getClickOffset  } from './events';
+import fallbackVideo from '../assets/Fallback.mp4';
+import fallbackImage from '../assets/AyaSofia.jpg';
 
 export async function runApp(): Promise<void> {
   setMessage('Please allow this site to use your camera. Your data will not be sent over the Internet.', 'message');
@@ -26,22 +29,32 @@ export async function runApp(): Promise<void> {
     startButton.style.display = 'none';
     canvasContainer.style.display = 'block';
 
+    let provider: OffscreenCanvasProvider;
+    let offscreenCanvas: HTMLCanvasElement;
+
     const timer = new Timer();
-    const stream = await getCameraMediaStream();
-    const video = new OffscreenVideo(stream || fallback);
-    const videoCanvas = await video.start();
+    try {
+      const stream = await getCameraMediaStream();
+      const video = new OffscreenVideo(stream || fallbackVideo);
+      offscreenCanvas = await video.start();
+      provider = video;
+    } catch (error) {
+      const image = new OffscreenImage(fallbackImage);
+      offscreenCanvas = await image.start();
+      provider = image;
+    }
     const onscreenCanvas = addCanvasToContainer('canvasContainer');
     resizeCanvas();
     const rippler = new Rippler();
     startDisplayLoop(update);
     onscreenCanvas.addEventListener('click', handleCanvasClick);
     window.addEventListener('resize', resizeCanvas);
-    video.onended(handleEnded);
-    setMessage('Click on the video to make waves.', 'message');
+    provider.onended(handleEnded);
+    setMessage('Click on the picture to make waves.', 'message');
 
     function update() {
-      video.update();
-      rippler.apply(videoCanvas, onscreenCanvas, timer.getSeconds());
+      provider.update();
+      rippler.apply(offscreenCanvas, onscreenCanvas, timer.getSeconds());
     }
 
     function handleCanvasClick(event: MouseEvent) {
@@ -51,7 +64,7 @@ export async function runApp(): Promise<void> {
     }
 
     function resizeCanvas() {
-      const aspectRatio = videoCanvas.width / videoCanvas.height;
+      const aspectRatio = offscreenCanvas.width / offscreenCanvas.height;
       resizeContainedCanvas(onscreenCanvas, aspectRatio);
     }
 

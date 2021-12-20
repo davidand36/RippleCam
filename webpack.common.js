@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
-// const FaviconsWebpackPlugin = require( 'favicons-webpack-plugin' )
+const FaviconsPlugin = require( 'favicons-webpack-plugin' )
 
 module.exports = {
   entry: './src/index.ts',
@@ -10,11 +9,26 @@ module.exports = {
       title: 'Ripple Cam',
       template: 'src/index.html',
     }),
-    // new FaviconsWebpackPlugin('assets/favicon/logo.svg'),
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      exclude: [ /\.mp4$/ ],
+    new FaviconsPlugin({
+      logo: 'assets/logo.svg',
+      prefix: 'assets/',
+      favicons: {
+        appName: 'Ripple Cam',
+        appShortName: 'RippleCam',
+        appDescription: 'Make waves in camera video',
+        start_url: '/',
+        theme_color: '#B9D9EB',
+        background: '#B9D9EB',
+        icons: {
+          favicons: true,
+          android: true,
+          appleIcon: false,
+          appleStartup: false,
+          coast: false,
+          windows: true,
+          yandex: false,
+        }
+      },
     }),
   ],
   output: {

@@ -4,9 +4,9 @@
   Video that draws to an off-screen canvas
 */
 
-type CallbackFunction = (video: OffscreenVideo) => void;
+import { CallbackFunction, OffscreenCanvasProvider } from "./OffscreenCanvasProvider";
 
-export default class OffscreenVideo {
+export default class OffscreenVideo implements OffscreenCanvasProvider {
   private video: HTMLVideoElement;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -21,16 +21,13 @@ export default class OffscreenVideo {
     }
   }
 
-  async start(): Promise<HTMLCanvasElement> {
+  start(): Promise<HTMLCanvasElement> {
     const self = this;
     return new Promise((resolve, reject) => {
-      try {
-        this.video.play();
-        this.video.addEventListener('loadedmetadata', setupCanvas);
-        this.video.addEventListener('ended', handleEnded);
-      } catch (err) {
-        reject(err);
-      }
+      self.video.addEventListener('loadedmetadata', setupCanvas);
+      self.video.addEventListener('ended', handleEnded);
+      self.video.play()
+        .catch(reject);
 
       function setupCanvas(): void {
         self.canvas = document.createElement('canvas');
@@ -39,16 +36,16 @@ export default class OffscreenVideo {
         self.ctx = self.canvas.getContext('2d');
         resolve(self.canvas);
       }
-    });
 
-    function handleEnded(): void {
-      self.ctx = null;
-      self.canvas = null;
-      self.video = null;
-      if (self.endedCallback) {
-        self.endedCallback(self);
+      function handleEnded(): void {
+        self.ctx = null;
+        self.canvas = null;
+        self.video = null;
+        if (self.endedCallback) {
+          self.endedCallback(self);
+        }
       }
-    }
+    });
   }
 
   update(): void {

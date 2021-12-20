@@ -1,16 +1,7 @@
 import './index.css';
-import { runApp } from './App';
+import { registerServiceWorker } from './pwa';
+import { runApp } from './app';
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
-        console.log('SW registered:', registration);
-      })
-      .catch(error => {
-        console.error('SW registration error:', error);
-      });
-  });
-}
+registerServiceWorker();
 
 runApp();
