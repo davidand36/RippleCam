@@ -11,12 +11,12 @@ module.exports = {
     }),
     new FaviconsPlugin({
       logo: 'assets/logo.svg',
-      prefix: 'assets/',
+      prefix: 'icons/',
       favicons: {
         appName: 'Ripple Cam',
-        appShortName: 'RippleCam',
         appDescription: 'Make waves in camera video',
         start_url: '/',
+        display: 'minimal-ui',
         theme_color: '#B9D9EB',
         background: '#B9D9EB',
         icons: {

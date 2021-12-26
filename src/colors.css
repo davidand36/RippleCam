@@ -1,10 +1,16 @@
 :root {
-  --primary-dark-color: rgb(0, 13, 116);
-  --primary-light-color: rgb(185, 217, 235);
-  --primary-highlight-color: rgb(255, 255, 0);
-  --primary-dark-lighter-20: rgb(0, 22, 195);
-  --primary-light-lighter-20: rgb(199, 225, 239);
-  --primary-light-lighter-60: rgb(227, 240, 247);
+  --cu-light-blue: rgb(172, 204, 230); /* #accce6 */
+  --cc-medium-blue: rgb(74, 133, 200); /* #4a85c8 */
+  --cu-dark-blue: rgb(0, 51, 115);     /* #003373 */
+  --cc-light-warm-grey: rgb(205, 201, 197); /* #cdc9c5 */
+  --cc-dark-warm-grey: rgb(94, 81, 78); /* #5e514e */
+  --cc-yellow: rgb(252, 212, 80);       /* #fcd450 */
+
+  --primary-dark-color: var(--cu-dark-blue);
+  --primary-light-color: var(--cu-light-blue);
+  --primary-highlight-color: var(--cc-yellow);
+  --primary-dark-lighter-20: rgb(0, 96, 217);
+  --primary-light-lighter-10: rgb(213, 229, 243);
 
   --error-dark-color: rgb(100, 0, 0);
   --error-light-color: rgb(255, 220, 220);

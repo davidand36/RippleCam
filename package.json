@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack serve --https --open --config webpack.dev.js",
+    "start": "webpack serve --https --config webpack.dev.js",
     "serve:dist": "http-server dist --port 6311",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
